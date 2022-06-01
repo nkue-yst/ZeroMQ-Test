@@ -13,8 +13,10 @@ int main()
     zmq::message_t buf;
     auto res = sock.recv(buf, zmq::recv_flags::none);
 
-    std::vector ivec(buf.data<int>(), buf.data<int>() + buf.size() / sizeof(int));
+    std::vector ivec(buf.data<uint8_t>(), buf.data<uint8_t>() + buf.size() / sizeof(uint8_t));
+
+    std::cout << buf << std::endl;
 
     for (auto item : ivec)
-        std::cout << (int)item << std::endl;
+        std::cout << (int32_t)item << std::endl;
 }
